@@ -2,6 +2,15 @@
   <div class="container">
     <SearchBar @on-search="handleSearch" />
     <ProductList :products="products" />
+    <!-- 显示当前页码 -->
+    <div class="page-info">
+      <span>当前页码：{{ page }}</span>
+    </div>
+    
+    <!-- 显示每页显示数量 -->
+    <div class="limit-info">
+      <span>每页显示数量：{{ limit }}</span>
+    </div>
     <Pagination 
       :currentPage="page" 
       :totalPages="totalPages" 
