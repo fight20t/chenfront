@@ -49,14 +49,27 @@ export default {
     },
     fetchProducts() {
       // 请根据你的后端 API 接口修改 URL
-      axios.get(`/api/products?keyword=${this.keyword}&page=${this.page}`)
-      .then(response => {
-        this.products = response.data.products
-        this.totalPages = response.data.totalPages
-      })
-      .catch(error => {
-        console.error('获取商品数据失败:', error)
-      })
+          axios.get('/api/products', {
+      params: {
+        keyword: this.keyword, // 搜索关键字（若为空则传空字符串或不传）
+        page: this.page,       // 当前页码
+        limit: this.limit      // 每页显示数量
+      },
+      headers: {
+        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsInVzZXJuYW1lIjoibmlZRF5Jc3hkSCJ9LCJleHAiOjE3NDMwNTQzNzd9.s5ZRXLi7n4lLut_LMZLfiRWSe6oArGgaUEECLlAUi20'
+      }
+    })
+    .then(response => {
+      // 请求成功后的处理逻辑
+      this.products = response.data.data.results;
+      // 根据返回的数据格式获取总条数或总页数
+    })
+    .catch(error => {
+      console.error('获取商品数据失败:', error);
+    });   
+
+
+      
     }
   },
   mounted() {
