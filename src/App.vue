@@ -56,7 +56,7 @@ export default {
         limit: this.limit      // 每页显示数量
       },
       headers: {
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsInVzZXJuYW1lIjoibmlZRF5Jc3hkSCJ9LCJleHAiOjE3NDMwNTQzNzd9.s5ZRXLi7n4lLut_LMZLfiRWSe6oArGgaUEECLlAUi20'
+         Authorization: process.env.VUE_APP_AUTH_TOKEN
       }
     })
     .then(response => {
