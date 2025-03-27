@@ -60,7 +60,7 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(229, 229, 229, 0.3);
   z-index: 1000;
 }
 
@@ -115,9 +115,9 @@ export default {
 
 .description-container {
   position: absolute;
-  left: 385px;
+  left: 485px;
   top: 190px;
-  right: 111px;
+  right: 11px;
   bottom: 403px;
   border: none; 
   padding: 10px; 
@@ -156,7 +156,7 @@ export default {
   bottom: 87px;
   width: 863px;
   height: 83px;
-  border: 1px solid #ccc; /* 可根据需要调整边框样式 */
+  border: none; 
   display: flex;
 }
 
@@ -167,6 +167,13 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border-radius: 20px; /* 设置圆角 */
+  background-image: url('https://img.js.design/assets/img/67cfdb8607c4c2e467899865.png'); /* 设置背景图片 */
+  background-size: cover; /* 使背景图片覆盖整个按钮 */
+  color: white; /* 文字颜色为白色 */
+  font-weight: bold; /* 文字为粗体 */
+  margin: 5px; /* 增加按钮之间的间距 */
+  font-size: 24px; /* 调整字体大小 */
 }
 
 .button-row {
