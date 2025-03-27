@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <SearchBar @on-search="handleSearch" />
-    <ProductList :products="products" />
+    <ProductList :products="products" @show-product="openProductModal" />
+    
     <!-- 显示当前页码 -->
     <div class="page-info">
       <span>当前页码：{{ page }}</span>
@@ -11,10 +12,18 @@
     <div class="limit-info">
       <span>每页显示数量：{{ limit }}</span>
     </div>
+    
     <Pagination 
       :currentPage="page" 
       :totalPages="totalPages" 
       @page-change="handlePageChange" 
+    />
+    
+    <!-- 当 modalProduct 不为空时显示悬浮的 ProductModal 组件 -->
+    <ProductModal 
+      v-if="modalProduct" 
+      :product="modalProduct" 
+      @close="closeProductModal" 
     />
   </div>
 </template>
@@ -24,13 +33,15 @@ import axios from 'axios'
 import SearchBar from './components/SearchBar.vue'
 import ProductList from './components/ProductList.vue'
 import Pagination from './components/Pagination.vue'
+import ProductModal from './components/ProductModal.vue'
 
 export default {
   name: 'App',
   components: {
     SearchBar,
     ProductList,
-    Pagination
+    Pagination,
+    ProductModal
   },
   data() {
     return {
@@ -54,7 +65,8 @@ export default {
       keyword: '',
       page: 1,
       totalPages: 1,
-      limit: 10  // 每页显示数量，默认值为 10
+      limit: 10,  // 每页显示数量，默认值为 10
+      modalProduct: null
     }
   },
   watch: {
@@ -73,29 +85,30 @@ export default {
     handlePageChange(newPage) {
       this.page = newPage
     },
+    openProductModal(product) {
+      this.modalProduct = product
+    },
+    closeProductModal() {
+      this.modalProduct = null
+    },
     fetchProducts() {
-      // 请根据你的后端 API 接口修改 URL
-          axios.get('/api/products', {
-      params: {
-        keyword: this.keyword, // 搜索关键字（若为空则传空字符串或不传）
-        page: this.page,       // 当前页码
-        limit: this.limit      // 每页显示数量
-      },
-      headers: {
-         Authorization: process.env.VUE_APP_AUTH_TOKEN
-      }
-    })
-    .then(response => {
-      // 请求成功后的处理逻辑
-      this.products = response.data.data.results;
-      // 根据返回的数据格式获取总条数或总页数
-    })
-    .catch(error => {
-      console.error('获取商品数据失败:', error);
-    });   
-
-
-      
+      axios.get('/api/products', {
+        params: {
+          keyword: this.keyword,
+          page: this.page,
+          limit: this.limit
+        },
+        headers: {
+          Authorization: process.env.VUE_APP_AUTH_TOKEN
+        }
+      })
+      .then(response => {
+        this.products = response.data.data.results;
+        // 根据实际返回数据设置 totalPages
+      })
+      .catch(error => {
+        console.error('获取商品数据失败:', error);
+      });   
     }
   },
   mounted() {

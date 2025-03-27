@@ -1,23 +1,27 @@
 <template>
   <div class="product-list">
-    <div v-if="products.length === 0">
-      没有查询到相关商品
+    <div v-if="products && products.length" class="products">
+      <div v-for="product in products" :key="product.id" class="product">
+        <img :src="product.imageUrl" alt="product image" @click="handleImageClick(product)" />
+        <p>{{ product.name }}</p>
+        <p>￥{{ product.price }}</p>
+      </div>
     </div>
-    <div v-else class="product-item" v-for="product in products" :key="product.id">
-      <img :src="product.imageUrl" :alt="product.name" />
-      <h3>{{ product.name }}</h3>
-      <p>价格: ¥{{ product.price }}</p>
+    <div v-else>
+      没有查询到相关商品
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ProductList',
+  name: "ProductList",
   props: {
-    products: {
-      type: Array,
-      required: true
+    products: Array
+  },
+  methods: {
+    handleImageClick(product) {
+      this.$emit("show-product", product);
     }
   }
 }
@@ -27,18 +31,16 @@ export default {
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
 }
 
-.product-item {
-  border: 1px solid #ddd;
-  padding: 10px;
-  width: calc(25% - 20px);
-  box-sizing: border-box;
+.product {
+  margin: 10px;
+  cursor: pointer;
 }
 
-.product-item img {
-  max-width: 100%;
-  height: auto;
+.product img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 </style>
