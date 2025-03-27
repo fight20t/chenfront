@@ -1,6 +1,7 @@
 <template>
   <div class="app-wrapper">
     <NavBar />
+    <TitleBar />
     <div class="container">
       <SearchBar @on-search="handleSearch" />
       <ProductList :products="products" @show-product="openProductModal" />
@@ -15,10 +16,10 @@
         <span>每页显示数量：{{ limit }}</span>
       </div>
       
-      <Pagination
-        :currentPage="page"
-        :totalPages="totalPages"
-        @page-change="handlePageChange"
+      <Pagination 
+        :currentPage="page" 
+        :totalPages="totalPages" 
+        @page-change="handlePageChange" 
       />
       
       <!-- 当 modalProduct 不为空时显示悬浮的 ProductModal 组件 -->
@@ -28,6 +29,7 @@
         @close="closeProductModal" 
       />
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -38,6 +40,8 @@ import ProductList from './components/ProductList.vue'
 import Pagination from './components/Pagination.vue'
 import ProductModal from './components/ProductModal.vue'
 import NavBar from './components/NavBar.vue'
+import Footer from './components/Footer.vue'
+import TitleBar from './components/TitleBar.vue'
 
 export default {
   name: 'App',
@@ -46,7 +50,9 @@ export default {
     ProductList,
     Pagination,
     ProductModal,
-    NavBar
+    NavBar,
+    Footer,
+    TitleBar
   },
   data() {
     return {
@@ -125,12 +131,14 @@ export default {
 <style scoped>
 .app-wrapper {
   position: relative;
+  /* Ensure minimum height to display all absolute positioned elements */
+  min-height: 1750px;
 }
 
-/* 给容器增加顶部间距，避免被导航栏遮挡 */
+/* 给容器增加顶部间距，避免被导航栏和标题遮挡 */
 .container {
   max-width: 1200px;
-  margin: 100px auto 20px;
+  margin: 150px auto 20px;
   padding: 20px;
 }
 </style>
