@@ -1,7 +1,6 @@
 <template>
   <div class="app-wrapper">
     <NavBar />
-    <TitleBar />
     <div class="container">
       <SearchBar @on-search="handleSearch" />
       <ProductList :products="products" @show-product="openProductModal" />
@@ -41,7 +40,6 @@ import Pagination from './components/Pagination.vue'
 import ProductModal from './components/ProductModal.vue'
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
-import TitleBar from './components/TitleBar.vue'
 
 export default {
   name: 'App',
@@ -51,8 +49,7 @@ export default {
     Pagination,
     ProductModal,
     NavBar,
-    Footer,
-    TitleBar
+    Footer
   },
   data() {
     return {
@@ -131,14 +128,14 @@ export default {
 <style scoped>
 .app-wrapper {
   position: relative;
-  /* Ensure minimum height to display all absolute positioned elements */
+  /* Optionally, provide a minimum height to ensure space for Footer */
   min-height: 1750px;
 }
 
-/* 给容器增加顶部间距，避免被导航栏和标题遮挡 */
+/* 给容器增加顶部间距，避免被导航栏遮挡 */
 .container {
   max-width: 1200px;
-  margin: 150px auto 20px;
+  margin: 100px auto 20px;
   padding: 20px;
 }
 </style>
