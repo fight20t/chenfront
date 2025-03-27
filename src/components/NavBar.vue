@@ -18,7 +18,7 @@ export default {
 .navbar {
   position: absolute;
   left: 0px;
-  top: -50px;
+  top: -2px;
   width: 1440px;
   height: 66px;
   opacity: 1;

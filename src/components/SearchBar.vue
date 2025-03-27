@@ -46,8 +46,8 @@ form {
   /* 使表单左右居中 */
   margin-left: auto;
   margin-right: auto;
-  /* 表单距离页面顶端 100px */
-  margin-top: 100px;
+  /* 表单距离页面顶端 125px */
+  margin-top: 125px;
   /* 设置表单的最大宽度，避免在大屏幕上过于分散 */
   max-width: 600px; 
 }

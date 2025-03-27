@@ -1,26 +1,27 @@
 <template>
   <div class="app-wrapper">
     <NavBar />
+    <TitleBar /> <!-- 添加 TitleBar 组件 -->
     <div class="container">
       <SearchBar @on-search="handleSearch" />
       <ProductList :products="products" @show-product="openProductModal" />
-      
+
       <!-- 显示当前页码 -->
       <div class="page-info">
         <span>当前页码：{{ page }}</span>
       </div>
-      
+
       <!-- 显示每页显示数量 -->
       <div class="limit-info">
         <span>每页显示数量：{{ limit }}</span>
       </div>
-      
+
       <Pagination 
         :currentPage="page" 
         :totalPages="totalPages" 
         @page-change="handlePageChange" 
       />
-      
+
       <!-- 当 modalProduct 不为空时显示悬浮的 ProductModal 组件 -->
       <ProductModal 
         v-if="modalProduct" 
@@ -40,6 +41,7 @@ import Pagination from './components/Pagination.vue'
 import ProductModal from './components/ProductModal.vue'
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
+import TitleBar from './components/TitleBar.vue' // 导入 TitleBar 组件
 
 export default {
   name: 'App',
@@ -49,7 +51,8 @@ export default {
     Pagination,
     ProductModal,
     NavBar,
-    Footer
+    Footer,
+    TitleBar // 注册 TitleBar 组件
   },
   data() {
     return {
@@ -138,4 +141,4 @@ export default {
   margin: 100px auto 20px;
   padding: 20px;
 }
-</style>
+</style>    
