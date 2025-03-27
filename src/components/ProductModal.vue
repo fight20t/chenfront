@@ -26,7 +26,7 @@
         </div>
         <div class="button-box">
           <!-- 点击调用 buyNow 方法，实现购买操作 -->
-          <div class="button-left" @click="buyNow">Buy Now</div>
+          <div class="button-left" @click="buyNow">Add to Stars</div>
           <!-- 点击调用 addToCart 方法，实现添加到购物车操作 -->
           <div class="button-right" @click="addToCart">Add to Cart</div>
         </div>
@@ -54,19 +54,19 @@ export default {
     },
     async buyNow() {
       try {
-        // 向 /api/buy 接口发送 POST 请求，传递产品 ID
-        const response = await axios.post('/api/buy', {
+        // 向 /product/favorite 接口发送 POST 请求，传递产品 ID
+        const response = await axios.post('/product/favorite', {
           productId: this.product.id,
         });
         // 打印购买成功信息和响应数据
-        console.log('购买成功:', response.data);
+        console.log('添加收藏夹成功:', response.data);
         // 这里可以添加更多逻辑，如弹出提示框告知用户购买成功
-        alert('购买成功！');
+        alert('添加收藏夹成功！');
       } catch (error) {
         // 打印购买失败信息和错误详情
-        console.error('购买失败:', error);
+        console.error('添加收藏夹失败:', error);
         // 这里可以添加更多逻辑，如弹出提示框告知用户购买失败
-        alert('购买失败，请稍后重试！');
+        alert('添加收藏夹失败，请稍后重试！');
       }
     },
     async addToCart() {
