@@ -1,30 +1,33 @@
 <template>
-  <div class="container">
-    <SearchBar @on-search="handleSearch" />
-    <ProductList :products="products" @show-product="openProductModal" />
-    
-    <!-- 显示当前页码 -->
-    <div class="page-info">
-      <span>当前页码：{{ page }}</span>
+  <div class="app-wrapper">
+    <NavBar />
+    <div class="container">
+      <SearchBar @on-search="handleSearch" />
+      <ProductList :products="products" @show-product="openProductModal" />
+      
+      <!-- 显示当前页码 -->
+      <div class="page-info">
+        <span>当前页码：{{ page }}</span>
+      </div>
+      
+      <!-- 显示每页显示数量 -->
+      <div class="limit-info">
+        <span>每页显示数量：{{ limit }}</span>
+      </div>
+      
+      <Pagination
+        :currentPage="page"
+        :totalPages="totalPages"
+        @page-change="handlePageChange"
+      />
+      
+      <!-- 当 modalProduct 不为空时显示悬浮的 ProductModal 组件 -->
+      <ProductModal 
+        v-if="modalProduct" 
+        :product="modalProduct" 
+        @close="closeProductModal" 
+      />
     </div>
-    
-    <!-- 显示每页显示数量 -->
-    <div class="limit-info">
-      <span>每页显示数量：{{ limit }}</span>
-    </div>
-    
-    <Pagination 
-      :currentPage="page" 
-      :totalPages="totalPages" 
-      @page-change="handlePageChange" 
-    />
-    
-    <!-- 当 modalProduct 不为空时显示悬浮的 ProductModal 组件 -->
-    <ProductModal 
-      v-if="modalProduct" 
-      :product="modalProduct" 
-      @close="closeProductModal" 
-    />
   </div>
 </template>
 
@@ -34,6 +37,7 @@ import SearchBar from './components/SearchBar.vue'
 import ProductList from './components/ProductList.vue'
 import Pagination from './components/Pagination.vue'
 import ProductModal from './components/ProductModal.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'App',
@@ -41,7 +45,8 @@ export default {
     SearchBar,
     ProductList,
     Pagination,
-    ProductModal
+    ProductModal,
+    NavBar
   },
   data() {
     return {
@@ -118,9 +123,14 @@ export default {
 </script>
 
 <style scoped>
+.app-wrapper {
+  position: relative;
+}
+
+/* 给容器增加顶部间距，避免被导航栏遮挡 */
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 100px auto 20px;
   padding: 20px;
 }
 </style>
