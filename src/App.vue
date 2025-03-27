@@ -34,10 +34,27 @@ export default {
   },
   data() {
     return {
-      products: [],
+      // 用模拟数据填充 products 数组
+      products: [
+        {
+          id: 1,
+          name: "示例商品 1",
+          description: "这是一个示例商品。",
+          price: 99.9,
+          imageUrl: "https://tse4-mm.cn.bing.net/th/id/OIP-C.Uml0Hq_D3cM1W7_C_2ptWwHaJ4?rs=1&pid=ImgDetMain"
+        },
+        {
+          id: 2,
+          name: "示例商品 2",
+          description: "这是另一个示例商品。",
+          price: 149.9,
+          imageUrl: "https://imgservice.suning.cn/uimg1/b2c/image/_g6Xm7MgaE0Hbn5zC_rnCw.png"
+        }
+      ],
       keyword: '',
       page: 1,
-      totalPages: 1
+      totalPages: 1,
+      limit: 10  // 每页显示数量，默认值为 10
     }
   },
   watch: {
