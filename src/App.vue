@@ -50,7 +50,7 @@ export default {
         {
           id: 1,
           name: "示例商品 1",
-          description: "这是一个示例商品。",
+          description: "这是一个示例商品。这里是产品介绍，型号，尺寸等信息。",
           price: 99.9,
           imageUrl: "https://tse4-mm.cn.bing.net/th/id/OIP-C.Uml0Hq_D3cM1W7_C_2ptWwHaJ4?rs=1&pid=ImgDetMain"
         },
